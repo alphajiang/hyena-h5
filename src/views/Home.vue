@@ -3,20 +3,28 @@
     <!--
     <img alt="Vue logo" src="../assets/logo.png">
     -->
-    <span>类型</span>
+    <h2 class='title'>类型</h2>
     <ul>
-      <li v-for="(item) in pointTypes"
-       v-bind:key="item"
-       v-on:click="onClickPointType(item)">{{ item }}</li>
+      <li class='pointType'
+        v-for="(item) in pointTypes"
+        v-bind:key="item"
+        v-on:click="onClickPointType(item)"
+      >{{ item }} >></li>
     </ul>
 
-<!--
+    <!--
     <a v-on:click="onClickAaa">fewgewfew</a>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     -->
   </div>
 </template>
 
+<style lang="scss">
+
+h2 {
+  margin-left: 25px;
+}
+</style>
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
@@ -30,7 +38,7 @@ export default {
     this.loadPointTypes();
   },
   components: {
-   // HelloWorld
+    // HelloWorld
   },
   data: function() {
     return {
@@ -39,13 +47,10 @@ export default {
   },
   methods: {
     onClickPointType(pointType) {
-      console.log("aaaaaa");
-      console.log(pointType);
-      this.$http({
-        method: "get",
-        url: "/api/hyena/system/listPointType",
-        data: {
-          name: "virus"
+      this.$router.push({
+        path: "/point/list",
+        query: {
+          pointType: pointType
         }
       });
     },
