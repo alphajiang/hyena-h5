@@ -16,6 +16,13 @@
       <el-table-column prop="used" label="已使用" width="180"></el-table-column>
       <el-table-column prop="expire" label="已过期" width="180"></el-table-column>
     </el-table>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="total"
+      :page-size="pageSize"
+      @current-change="onClickPage"
+    ></el-pagination>
     <el-dialog title="新增积分" :visible.sync="showDialog" width="30%">
       <el-form ref="addPointForm" :model="addPointForm" :rules="rules" label-width="80px">
         <el-form-item label="客户" prop="uid">
@@ -39,6 +46,9 @@
 </template>
 
 <style scoped lang="scss">
+.el-table {
+  margin-bottom: 20px;
+}
 </style>
 
 <script>
@@ -58,6 +68,9 @@ export default {
       clickable: true,
       showDialog: false,
       points: [],
+      total: 0,
+      page: 1,
+      pageSize: 10,
       addPointForm: {
         uid: '',
         point: ''
@@ -84,12 +97,20 @@ export default {
         method: 'get',
         url: '/api/hyena/point/listPoint',
         params: {
-          type: this.pointType
+          type: this.pointType,
+          start: (this.page - 1) * this.pageSize,
+          size: this.pageSize
         }
       }).then(res => {
         console.log(res)
         this.points = res.data.data
+        this.total = res.data.total
       })
+    },
+    onClickPage(val) {
+      console.info(val)
+      this.page = val
+      this.loadPoints()
     },
     onClickAddPoint(formName) {
       this.clickable = false

@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <!--
-    <img alt="Vue logo" src="../assets/logo.png">
-    -->
+
     <h2 class='title'>类型</h2>
     <ul>
       <li class='pointType'
