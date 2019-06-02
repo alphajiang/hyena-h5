@@ -28,30 +28,23 @@
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="showDialog = false">取 消</el-button>
-        <el-button type="primary" @click="onClickAddPoint('addPointForm')">确 定</el-button>
+        <el-button
+          type="primary"
+          :disabled="!clickable"
+          @click="onClickAddPoint('addPointForm')"
+        >确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <style scoped lang="scss">
-div.dialog {
-  width: 80%;
-  height: 80%;
-  max-width: 300px;
-  max-height: 600px;
-  min-width: 100px;
-  min-height: 200px;
-  border: gray 1px solid;
-}
 </style>
 
 <script>
 export default {
   name: 'PointList',
-  //   props : {
-  //       pointType : String
-  //   },
+
   components: {
     // list: list
   },
@@ -62,6 +55,7 @@ export default {
   },
   data: function() {
     return {
+      clickable: true,
       showDialog: false,
       points: [],
       addPointForm: {
@@ -97,20 +91,19 @@ export default {
         this.points = res.data.data
       })
     },
-    onClickOpenDialog() {
-      this.showDialog = true
-    },
     onClickAddPoint(formName) {
+      this.clickable = false
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.addPoint()
+          this.addPoint(formName)
         } else {
           console.log('error submit!!')
+          this.clickable = true
           return false
         }
       })
     },
-    addPoint() {
+    addPoint(formName) {
       this.$http({
         method: 'post',
         url: '/api/hyena/point/increase',
@@ -121,9 +114,15 @@ export default {
         })
       }).then(res => {
         console.log(res)
+        this.clickable = true
         // this.points = res.data.data;
-        this.loadPoints()
-        this.showDialog = false
+        if (res.data.status === 0) {
+          this.loadPoints()
+          this.$refs[formName].resetFields()
+          this.showDialog = false
+        } else {
+          this.$message.error(res.data.error)
+        }
       })
     }
   }
