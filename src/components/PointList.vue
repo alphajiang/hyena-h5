@@ -23,7 +23,13 @@
       :page-size="pageSize"
       @current-change="onClickPage"
     ></el-pagination>
-    <el-dialog title="新增积分" :visible.sync="showDialog" width="30%">
+    <el-dialog
+      title="新增积分"
+      :visible.sync="showDialog"
+      :modal="true"
+      :close-on-click-modal="false"
+      width="30%"
+    >
       <el-form ref="addPointForm" :model="addPointForm" :rules="rules" label-width="80px">
         <el-form-item label="客户" prop="uid">
           <el-input v-model="addPointForm.uid"></el-input>
