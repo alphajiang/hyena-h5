@@ -29,4 +29,7 @@
     }
   }
 }
+.el-breadcrumb {
+  padding: 20px 0 20px 0;
+}
 </style>

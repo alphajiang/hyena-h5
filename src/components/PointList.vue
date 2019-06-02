@@ -1,10 +1,12 @@
 <template>
   <div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>{{pointType}}</el-breadcrumb-item>
+    </el-breadcrumb>
+
     <div>
-      <h2>类型: {{pointType}}</h2>
-    </div>
-    <div>
-      <el-button type="primary" @click="onClickOpenDialog">新增</el-button>
+      <el-button type="primary" size="small" @click="showDialog = true">新增</el-button>
     </div>
     <el-table :data="points">
       <el-table-column prop="uid" label="客户" width="180"></el-table-column>
@@ -14,19 +16,21 @@
       <el-table-column prop="used" label="已使用" width="180"></el-table-column>
       <el-table-column prop="expire" label="已过期" width="180"></el-table-column>
     </el-table>
-    <div v-if="showDialog" class="dialog">
-      <div>
-        客户:
-        <input type="text" v-model="newUid">
-      </div>
-      <div>
-        积分:
-        <input type="text" v-model="newPoint">
-      </div>
-      <div>
-        <button @click="onClickAddPoint">确定</button>
-      </div>
-    </div>
+    <el-dialog title="新增积分" :visible.sync="showDialog" width="30%">
+      <el-form ref="addPointForm" :model="addPointForm" :rules="rules" label-width="80px">
+        <el-form-item label="客户" prop="uid">
+          <el-input v-model="addPointForm.uid"></el-input>
+        </el-form-item>
+        <el-form-item label="积分" prop="point">
+          <el-input v-model.number="addPointForm.point"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="showDialog = false">取 消</el-button>
+        <el-button type="primary" @click="onClickAddPoint('addPointForm')">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -60,8 +64,20 @@ export default {
     return {
       showDialog: false,
       points: [],
-      newUid: '',
-      newPoint: ''
+      addPointForm: {
+        uid: '',
+        point: ''
+      },
+      rules: {
+        uid: [
+          { required: true, message: '请输入客户ID', trigger: 'blur' },
+          { min: 1, max: 32, message: '客户ID不能太长', trigger: 'blur' }
+        ],
+        point: [
+          { required: true, message: '请输入客户积分', trigger: 'blur' },
+          { type: 'number', message: '积分必须为数字', trigger: 'blur' }
+        ]
+      }
     }
   },
   mounted: function() {
@@ -84,18 +100,30 @@ export default {
     onClickOpenDialog() {
       this.showDialog = true
     },
-    onClickAddPoint() {
+    onClickAddPoint(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.addPoint()
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    addPoint() {
       this.$http({
         method: 'post',
         url: '/api/hyena/point/increase',
         data: JSON.stringify({
           type: this.pointType,
-          uid: this.newUid,
-          point: this.newPoint
+          uid: this.addPointForm.uid,
+          point: this.addPointForm.point
         })
       }).then(res => {
         console.log(res)
         // this.points = res.data.data;
+        this.loadPoints()
+        this.showDialog = false
       })
     }
   }
