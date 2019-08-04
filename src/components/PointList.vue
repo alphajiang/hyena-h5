@@ -5,8 +5,13 @@
       <el-breadcrumb-item>{{pointType}}</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <div>
+    <div class='head-icon'>
       <el-button type="primary" size="small" @click="showDialog = true">新增</el-button>
+    </div>
+    <div class='head-icon'>
+      <el-input placeholder="请输入搜索关键词" size='small' clearable prefix-icon="el-icon-search" v-model="sk" @clear="searchPoints">
+        <el-button slot="append"  icon="el-icon-search" @click="searchPoints"></el-button>
+      </el-input>
     </div>
     <el-table :data="points" stripe>
       <el-table-column fixed type="index" width="50"></el-table-column>
@@ -64,6 +69,10 @@
 .el-table {
   margin-bottom: 20px;
 }
+div.head-icon {
+float:left;
+margin-right: 30px;
+}
 </style>
 
 <script>
@@ -86,6 +95,7 @@ export default {
       total: 0,
       page: 1,
       pageSize: 10,
+      sk: '',
       addPointForm: {
         uid: '',
         point: ''
@@ -127,6 +137,7 @@ export default {
         url: '/api/hyena/point/listPoint',
         data: JSON.stringify({
           type: this.pointType,
+          sk: this.sk,
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize
         })
@@ -139,6 +150,10 @@ export default {
     onClickPage(val) {
       console.info(val)
       this.page = val
+      this.loadPoints()
+    },
+    searchPoints() {
+      this.page = 1
       this.loadPoints()
     },
     onClickAddPoint(formName) {
