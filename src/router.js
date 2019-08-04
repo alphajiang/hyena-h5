@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import PointList from '@/components/PointList.vue'
+import PointRecList from '@/components/PointRecList.vue'
 
 Vue.use(Router)
 
@@ -25,8 +26,12 @@ export default new Router({
     {
       path: '/point/list',
       name: 'pointList',
-      component: PointList // ,
-      // props: { pointType : true}
+      component: PointList
+    },
+    {
+      path: '/point/rec/list',
+      name: 'pointRecList',
+      component: PointRecList
     }
   ]
 })
