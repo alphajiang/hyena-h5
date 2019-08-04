@@ -33,4 +33,23 @@
   padding: 20px 0 20px 0;
 }
 
+
+span.increase {// 增加积分
+    color: red;
+}
+span.decrease { // 减少积分
+    color: green;
+}
+span.freeze { // 冻结积分
+    color: dodgerblue;
+}
+span.unfreeze { // 解冻积分
+    color: palevioletred;
+}
+span.expire { // 过期积分
+    color: gray;
+}
+span.cancel { // 作废积分
+    color: gray;
+}
 </style>

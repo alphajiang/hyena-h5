@@ -22,6 +22,9 @@
       <el-table-column prop="expire" label="已过期" width="100"></el-table-column>
  <el-table-column label="操作">
       <template slot-scope="scope">
+                <el-button
+          size="mini"
+          @click="showPointLogList(scope.$index, scope.row)">流水</el-button>
         <el-button
           size="mini"
           @click="showPointRecList(scope.$index, scope.row)">积分块</el-button>
@@ -168,6 +171,16 @@ export default {
       console.log(point);
       this.$router.push({
         path: '/point/rec/list',
+        query: {
+          pointType: this.pointType,
+          uid: point.uid
+        }
+      })      
+    },
+        showPointLogList(idx, point) {
+      console.log(point);
+      this.$router.push({
+        path: '/point/log/list',
         query: {
           pointType: this.pointType,
           uid: point.uid

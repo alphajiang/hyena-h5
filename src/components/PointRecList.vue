@@ -70,21 +70,7 @@ export default {
       points: [],
       total: 0,
       page: 1,
-      pageSize: 10,
-      addPointForm: {
-        uid: '',
-        point: ''
-      },
-      rules: {
-        uid: [
-          { required: true, message: '请输入客户ID', trigger: 'blur' },
-          { min: 1, max: 32, message: '客户ID不能太长', trigger: 'blur' }
-        ],
-        point: [
-          { required: true, message: '请输入客户积分', trigger: 'blur' },
-          { type: 'number', message: '积分必须为数字', trigger: 'blur' }
-        ]
-      }
+      pageSize: 10
     }
   },
   mounted: function() {
