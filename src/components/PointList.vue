@@ -8,9 +8,13 @@
     <div>
       <el-button type="primary" size="small" @click="showDialog = true">新增</el-button>
     </div>
-    <el-table :data="points">
-      <el-table-column prop="uid" label="客户" width="180"></el-table-column>
-      <el-table-column prop="name" label="名称" width="180"></el-table-column>
+    <el-table :data="points" stripe>
+    <el-table-column fixed
+      type="index"
+      width="50">
+    </el-table-column>      
+      <el-table-column prop="uid" label="UID" fixed width="180"></el-table-column>
+      <el-table-column prop="name" label="名称" fixed width="180"></el-table-column>
       <el-table-column prop="point" label="总积分" width="180"></el-table-column>
       <el-table-column prop="available" label="可用" width="180"></el-table-column>
       <el-table-column prop="frozen" label="冻结" width="180"></el-table-column>
