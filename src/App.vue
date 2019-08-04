@@ -1,12 +1,6 @@
 <template>
   <div id="app">
-    <!--
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    -->
-    <router-view/>
+    <router-view ></router-view>
   </div>
 </template>
 
@@ -33,23 +27,28 @@
   padding: 20px 0 20px 0;
 }
 
-
-span.increase {// 增加积分
-    color: red;
+span.increase {
+  // 增加积分
+  color: red;
 }
-span.decrease { // 减少积分
-    color: green;
+span.decrease {
+  // 减少积分
+  color: green;
 }
-span.freeze { // 冻结积分
-    color: dodgerblue;
+span.freeze {
+  // 冻结积分
+  color: dodgerblue;
 }
-span.unfreeze { // 解冻积分
-    color: palevioletred;
+span.unfreeze {
+  // 解冻积分
+  color: palevioletred;
 }
-span.expire { // 过期积分
-    color: gray;
+span.expire {
+  // 过期积分
+  color: gray;
 }
-span.cancel { // 作废积分
-    color: gray;
+span.cancel {
+  // 作废积分
+  color: gray;
 }
 </style>

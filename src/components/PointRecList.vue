@@ -1,35 +1,31 @@
 <template>
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item  :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item  :to="{ path: '/point/list', query: {
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item
+        :to="{ path: '/point/list', query: {
           pointType: pointType
-        } }">{{pointType}}</el-breadcrumb-item>
+        } }"
+      >{{pointType}}</el-breadcrumb-item>
       <el-breadcrumb-item>积分块 ({{uid}})</el-breadcrumb-item>
     </el-breadcrumb>
 
-
     <el-table :data="points" stripe>
-    <el-table-column fixed
-      type="index"
-      width="50">
-    </el-table-column>      
-      <el-table-column prop="total" label="总数" width="100"></el-table-column>
-      <el-table-column prop="available" label="可用" width="100"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" width="100"></el-table-column>
-      <el-table-column prop="used" label="已使用" width="100"></el-table-column>
-      <el-table-column prop="expire" label="已过期" width="100"></el-table-column>
-      
+      <el-table-column fixed type="index" width="30"></el-table-column>
+      <el-table-column prop="total" label="块内总数" align="right" width="80"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="80"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="80"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="80"></el-table-column>
+
       <el-table-column prop="tag" label="标签" width="150"></el-table-column>
       <el-table-column prop="issueTime" label="发放时间" width="150"></el-table-column>
       <el-table-column prop="expireTime" label="有效期" width="150"></el-table-column>
- <el-table-column label="操作">
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="showDetail(scope.$index, scope.row)">明细</el-button>
-      </template>
-    </el-table-column>      
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="showDetail(scope.$index, scope.row)">明细</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       background
@@ -38,7 +34,6 @@
       :page-size="pageSize"
       @current-change="onClickPage"
     ></el-pagination>
-
   </div>
 </template>
 
@@ -60,7 +55,7 @@ export default {
       return this.$route.query.pointType
     },
     uid() {
-        return this.$route.query.uid
+      return this.$route.query.uid
     }
   },
   data: function() {
@@ -100,7 +95,7 @@ export default {
       this.loadPointRecList()
     },
     showDetail(idx, point) {
-      console.log(point);
+      console.log(point)
     }
   }
 }

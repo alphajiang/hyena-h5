@@ -9,30 +9,24 @@
       <el-button type="primary" size="small" @click="showDialog = true">新增</el-button>
     </div>
     <el-table :data="points" stripe>
-    <el-table-column fixed
-      type="index"
-      width="50">
-    </el-table-column>      
+      <el-table-column fixed type="index" width="50"></el-table-column>
       <el-table-column prop="uid" label="UID" fixed width="100"></el-table-column>
       <el-table-column prop="name" label="名称" fixed width="180"></el-table-column>
-      <el-table-column prop="point" label="有效积分" width="180"></el-table-column>
-      <el-table-column prop="available" label="可用" width="100"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" width="100"></el-table-column>
-      <el-table-column prop="used" label="已使用" width="100"></el-table-column>
-      <el-table-column prop="expire" label="已过期" width="100"></el-table-column>
- <el-table-column label="操作">
-      <template slot-scope="scope">
-                <el-button
-          size="mini"
-          @click="showPointLogList(scope.$index, scope.row)">流水</el-button>
-        <el-button
-          size="mini"
-          @click="showPointRecList(scope.$index, scope.row)">积分块</el-button>
-      </template>
-    </el-table-column>      
+      <el-table-column prop="point" label="有效积分" align="right" width="100"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="80"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="100"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="100"></el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="showPointLogList(scope.$index, scope.row)">流水</el-button>
+          <el-button size="mini" @click="showPointRecList(scope.$index, scope.row)">积分块</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       background
+      :current-page="page"
       layout="prev, pager, next"
       :total="total"
       :page-size="pageSize"
@@ -108,9 +102,23 @@ export default {
       }
     }
   },
+  beforeMount: function() {
+    let lastPointType = sessionStorage.getItem('pointType')
+    if (lastPointType === this.pointType) {
+      this.page = parseInt(sessionStorage.getItem('POINT_LIST_PAGE'))
+      if (isNaN(this.page)) {
+        this.page = 1
+      }
+    }
+  },
   mounted: function() {
     // this.showDialog = false;
+
     this.loadPoints()
+  },
+  beforeDestroy: function() {
+    sessionStorage.setItem('pointType', this.pointType)
+    sessionStorage.setItem('POINT_LIST_PAGE', this.page)
   },
   methods: {
     loadPoints() {
@@ -168,24 +176,24 @@ export default {
       })
     },
     showPointRecList(idx, point) {
-      console.log(point);
+      console.log(point)
       this.$router.push({
         path: '/point/rec/list',
         query: {
           pointType: this.pointType,
           uid: point.uid
         }
-      })      
+      })
     },
-        showPointLogList(idx, point) {
-      console.log(point);
+    showPointLogList(idx, point) {
+      console.log(point)
       this.$router.push({
         path: '/point/log/list',
         query: {
           pointType: this.pointType,
           uid: point.uid
         }
-      })      
+      })
     }
   }
 }
