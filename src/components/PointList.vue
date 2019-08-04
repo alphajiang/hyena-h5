@@ -10,6 +10,7 @@
     </div>
     <el-table :data="points">
       <el-table-column prop="uid" label="客户" width="180"></el-table-column>
+      <el-table-column prop="name" label="名称" width="180"></el-table-column>
       <el-table-column prop="point" label="总积分" width="180"></el-table-column>
       <el-table-column prop="available" label="可用" width="180"></el-table-column>
       <el-table-column prop="frozen" label="冻结" width="180"></el-table-column>
@@ -100,13 +101,13 @@ export default {
   methods: {
     loadPoints() {
       this.$http({
-        method: 'get',
+        method: 'post',
         url: '/api/hyena/point/listPoint',
-        params: {
+        data: JSON.stringify({
           type: this.pointType,
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize
-        }
+        })
       }).then(res => {
         console.log(res)
         this.points = res.data.data
