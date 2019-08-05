@@ -17,11 +17,11 @@
       <el-table-column fixed type="index" width="50"></el-table-column>
       <el-table-column prop="uid" label="UID" fixed width="100"></el-table-column>
       <el-table-column prop="name" label="名称" fixed width="180"></el-table-column>
-      <el-table-column prop="point" label="有效积分" align="right" width="100"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="80"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="100"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="100"></el-table-column>
+      <el-table-column prop="point" label="有效积分" align="right" width="150"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="100"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="showPointLogList(scope.$index, scope.row)">流水</el-button>

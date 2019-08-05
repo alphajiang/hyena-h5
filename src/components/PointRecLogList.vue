@@ -7,11 +7,17 @@
           pointType: pointType
         } }"
       >{{pointType}}</el-breadcrumb-item>
-      <el-breadcrumb-item>流水 ({{uid}})</el-breadcrumb-item>
+      <el-breadcrumb-item
+        :to="{ path: '/point/rec/list', query: {
+          pointType: pointType,
+          uid: uid
+        } }"
+      >积分块 ({{uid}})</el-breadcrumb-item>
+      <el-breadcrumb-item>使用详情 ({{pointRecId}})</el-breadcrumb-item>
     </el-breadcrumb>
 
     <el-table :data="points" stripe>
-      <el-table-column fixed type="index" width="40"></el-table-column>
+      <el-table-column fixed type="index" width="30"></el-table-column>
       <el-table-column prop="createTime" fixed label="时间" width="100"></el-table-column>
       <el-table-column label="变动" fixed width="50">
         <template slot-scope="scope">
@@ -23,18 +29,11 @@
           <span :class="scope.row.cssClazz">{{scope.row.delta}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="point" label="有效积分" align="right" width="150"></el-table-column>
       <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
-      <el-table-column prop="expire" label="过期" align="right" width="150"></el-table-column>
-      <el-table-column prop="tag" label="标签" width="100"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
       <el-table-column prop="note" label="备注" width="200"></el-table-column>
-      <el-table-column label="额外信息" width="200">
-        <template slot-scope="scope">
-          <div v-html="scope.row.extraDisplay"></div>
-        </template>
-      </el-table-column>
     </el-table>
     <el-pagination
       background
@@ -54,7 +53,7 @@
 
 <script>
 export default {
-  name: 'PointLogList',
+  name: 'PointRecLogList',
 
   components: {
     // list: list
@@ -65,6 +64,9 @@ export default {
     },
     uid() {
       return this.$route.query.uid
+    },
+    pointRecId() {
+      return this.$route.query.pointRecId
     }
   },
   data: function() {
@@ -79,21 +81,20 @@ export default {
   },
   mounted: function() {
     // this.showDialog = false;
-
-    this.loadPoints()
+    this.loadPointRecLogList()
   },
-
   methods: {
-    loadPoints() {
+    loadPointRecLogList() {
       this.$http({
-        method: 'post',
-        url: '/api/hyena/point/listPointLog',
-        data: JSON.stringify({
+        method: 'get',
+        url: '/api/hyena/point/listPointRecordLog',
+        params: {
           type: this.pointType,
           uid: this.uid,
+          recId: this.pointRecId,
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize
-        })
+        }
       }).then(res => {
         console.log(res)
         this.points = res.data.data
@@ -140,19 +141,7 @@ export default {
     onClickPage(val) {
       console.info(val)
       this.page = val
-      this.loadPoints()
-    },
-    onClickAddPoint(formName) {
-      this.clickable = false
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.addPoint(formName)
-        } else {
-          console.log('error submit!!')
-          this.clickable = true
-          return false
-        }
-      })
+      this.loadPointRecLogList()
     }
   }
 }

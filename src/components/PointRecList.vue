@@ -12,18 +12,21 @@
 
     <el-table :data="points" stripe>
       <el-table-column fixed type="index" width="30"></el-table-column>
-      <el-table-column prop="total" label="块内总数" align="right" width="80"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="80"></el-table-column>
+      <el-table-column prop="id" label="块ID" align="right" width="60"></el-table-column>
+      <el-table-column prop="total" label="块内总数" align="right" width="150"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="80"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="80"></el-table-column>
-
+      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
+      <el-table-column label="有效" align='center' width="60">
+        <template slot-scope="s">{{s.row.enable | formatStatus}}</template>
+      </el-table-column>
       <el-table-column prop="tag" label="标签" width="150"></el-table-column>
       <el-table-column prop="issueTime" label="发放时间" width="150"></el-table-column>
       <el-table-column prop="expireTime" label="有效期" width="150"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="showDetail(scope.$index, scope.row)">明细</el-button>
+          <el-button size="mini" @click="showDetail(scope.$index, scope.row)">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -68,6 +71,15 @@ export default {
       pageSize: 10
     }
   },
+  filters: {
+    formatStatus: function(arg) {
+      if (arg === true) {
+        return '是'
+      } else {
+        return ''
+      }
+    }
+  },
   mounted: function() {
     // this.showDialog = false;
     this.loadPointRecList()
@@ -94,8 +106,16 @@ export default {
       this.page = val
       this.loadPointRecList()
     },
-    showDetail(idx, point) {
-      console.log(point)
+    showDetail(idx, pointRec) {
+      console.log(pointRec)
+      this.$router.push({
+        path: '/point/rec/log/list',
+        query: {
+          pointType: this.pointType,
+          uid: pointRec.uid,
+          pointRecId: pointRec.id
+        }
+      })
     }
   }
 }

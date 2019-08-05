@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import PointList from '@/components/PointList.vue'
 import PointLogList from '@/components/PointLogList.vue'
 import PointRecList from '@/components/PointRecList.vue'
+import PointRecLogList from '@/components/PointRecLogList.vue'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/point/rec/list',
       name: 'pointRecList',
       component: PointRecList
+    },
+    {
+      path: '/point/rec/log/list',
+      name: 'pointRecLogList',
+      component: PointRecLogList
     }
   ]
 })
