@@ -13,6 +13,7 @@
     <el-table :data="points" stripe>
       <el-table-column fixed type="index" width="30"></el-table-column>
       <el-table-column prop="id" label="块ID" align="right" width="60"></el-table-column>
+      <el-table-column prop="seqNum" label="seq" align="right" width="60"></el-table-column>
       <el-table-column prop="total" label="块内总数" align="right" width="150"></el-table-column>
       <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
@@ -21,7 +22,11 @@
       <el-table-column label="有效" align='center' width="60">
         <template slot-scope="s">{{s.row.enable | formatStatus}}</template>
       </el-table-column>
+      <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="tag" label="标签" width="150"></el-table-column>
+      <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
+      <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
+      <el-table-column prop="payType" label="payType" width="60"></el-table-column>      
       <el-table-column prop="issueTime" label="发放时间" width="150"></el-table-column>
       <el-table-column prop="expireTime" label="有效期" width="150"></el-table-column>
       <el-table-column label="操作">

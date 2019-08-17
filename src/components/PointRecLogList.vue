@@ -7,13 +7,24 @@
           pointType: pointType
         } }"
       >{{pointType}}</el-breadcrumb-item>
-      <el-breadcrumb-item
+      <template v-if="pointRecId">
+      <el-breadcrumb-item 
         :to="{ path: '/point/rec/list', query: {
           pointType: pointType,
           uid: uid
         } }"
       >积分块 ({{uid}})</el-breadcrumb-item>
-      <el-breadcrumb-item>使用详情 ({{pointRecId}})</el-breadcrumb-item>
+      <el-breadcrumb-item >使用详情 ({{pointRecId}})</el-breadcrumb-item>
+      </template>
+      <template v-if="seqNum">
+      <el-breadcrumb-item 
+        :to="{ path: '/point/log/list', query: {
+          pointType: pointType,
+          uid: uid
+        } }"
+      >流水 ({{uid}})</el-breadcrumb-item>
+      <el-breadcrumb-item >块详情 ({{seqNum}})</el-breadcrumb-item>
+      </template>      
     </el-breadcrumb>
 
     <el-table :data="points" stripe>
@@ -33,6 +44,11 @@
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
+      <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
+      <el-table-column prop="recId" label="块ID" width="60"></el-table-column>
+      <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
+      <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
+      <el-table-column prop="payType" label="payType" width="60"></el-table-column>      
       <el-table-column prop="note" label="备注" width="200"></el-table-column>
     </el-table>
     <el-pagination
@@ -65,6 +81,9 @@ export default {
     uid() {
       return this.$route.query.uid
     },
+    seqNum() {
+      return this.$route.query.seqNum
+    },
     pointRecId() {
       return this.$route.query.pointRecId
     }
@@ -91,6 +110,7 @@ export default {
         params: {
           type: this.pointType,
           uid: this.uid,
+          seqNum: this.seqNum,
           recId: this.pointRecId,
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize

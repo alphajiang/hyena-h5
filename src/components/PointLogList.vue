@@ -28,13 +28,23 @@
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="expire" label="过期" align="right" width="150"></el-table-column>
+      <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="tag" label="标签" width="100"></el-table-column>
+      <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
+      <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
+      <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
+      <el-table-column prop="payType" label="payType" width="60"></el-table-column>
       <el-table-column prop="note" label="备注" width="200"></el-table-column>
       <el-table-column label="额外信息" width="200">
         <template slot-scope="scope">
           <div v-html="scope.row.extraDisplay"></div>
         </template>
       </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="showDetail(scope.$index, scope.row)">块详情</el-button>
+        </template>
+      </el-table-column>      
     </el-table>
     <el-pagination
       background
@@ -153,7 +163,19 @@ export default {
           return false
         }
       })
-    }
+    },
+    showDetail(idx, pointLog) {
+      console.log(pointLog)
+      this.$router.push({
+        path: '/point/rec/log/list',
+        query: {
+          pointType: this.pointType,
+          pid : this.pid,
+          uid: this.uid,
+          seqNum: pointLog.seqNum
+        }
+      })
+    }    
   }
 }
 </script>

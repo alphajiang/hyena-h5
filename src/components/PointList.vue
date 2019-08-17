@@ -22,6 +22,7 @@
       <el-table-column prop="frozen" label="冻结" align="right" width="100"></el-table-column>
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
+      <el-table-column prop="seqNum" label="seq" align="right" width="60"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="showPointLogList(scope.$index, scope.row)">流水</el-button>
@@ -119,6 +120,7 @@ export default {
       if (isNaN(this.page)) {
         this.page = 1
       }
+      this.sk = sessionStorage.getItem('POINT_LIST_SK')
     }
   },
   mounted: function() {
@@ -129,6 +131,7 @@ export default {
   beforeDestroy: function() {
     sessionStorage.setItem('pointType', this.pointType)
     sessionStorage.setItem('POINT_LIST_PAGE', this.page)
+    sessionStorage.setItem('POINT_LIST_SK', this.sk)
   },
   methods: {
     loadPoints() {
