@@ -40,12 +40,15 @@
           <span :class="scope.row.cssClazz">{{scope.row.delta}}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="total" label="块总数" align="right" width="150"></el-table-column>
       <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
+      <el-table-column prop="cost" label="成本" align="right" width="150"></el-table-column>
       <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
       <el-table-column prop="recId" label="块ID" width="60"></el-table-column>
+      <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
       <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
       <el-table-column prop="payType" label="payType" width="60"></el-table-column>      

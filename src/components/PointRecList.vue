@@ -12,13 +12,15 @@
 
     <el-table :data="points" stripe>
       <el-table-column fixed type="index" width="30"></el-table-column>
-      <el-table-column prop="id" label="块ID" align="right" width="60"></el-table-column>
-      <el-table-column prop="seqNum" label="seq" align="right" width="60"></el-table-column>
+      <el-table-column fixed prop="id" label="块ID" align="right" width="60"></el-table-column>
+      <el-table-column fixed prop="seqNum" label="seq" align="right" width="60"></el-table-column>
       <el-table-column prop="total" label="块内总数" align="right" width="150"></el-table-column>
       <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
+      <el-table-column prop="totalCost" label="总成本" align="right" width="150"></el-table-column>
+      <el-table-column prop="usedCost" label="已使用成本" align="right" width="150"></el-table-column>
       <el-table-column label="有效" align='center' width="60">
         <template slot-scope="s">{{s.row.enable | formatStatus}}</template>
       </el-table-column>

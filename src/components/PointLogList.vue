@@ -28,6 +28,7 @@
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="expire" label="过期" align="right" width="150"></el-table-column>
+      <el-table-column prop="cost" label="成本" align="right" width="150"></el-table-column>
       <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="tag" label="标签" width="100"></el-table-column>
       <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
