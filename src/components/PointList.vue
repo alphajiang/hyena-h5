@@ -4,10 +4,11 @@
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>{{pointType}}</el-breadcrumb-item>
     </el-breadcrumb>
-
+<!--
     <div class='head-icon'>
       <el-button type="primary" size="small" @click="showDialog = true">新增</el-button>
     </div>
+-->
     <div class='head-icon'>
       <el-input placeholder="请输入搜索关键词" size='small' clearable prefix-icon="el-icon-search" v-model="sk" @clear="searchPoints">
         <el-button slot="append"  icon="el-icon-search" @click="searchPoints"></el-button>
