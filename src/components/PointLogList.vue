@@ -38,14 +38,17 @@
       <el-table-column prop="note" label="备注" width="200"></el-table-column>
       <el-table-column label="额外信息" width="200">
         <template slot-scope="scope">
-          <div v-html="scope.row.extraDisplay"></div>
+          <el-popover placement="top-start" title width="200" trigger="hover" content>
+            <div v-html="scope.row.extraDisplay"></div>
+            <div size="mini" class="extraSummary" slot="reference">{{scope.row.extraSummary}}</div>
+          </el-popover>
         </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="showDetail(scope.$index, scope.row)">块详情</el-button>
         </template>
-      </el-table-column>      
+      </el-table-column>
     </el-table>
     <el-pagination
       background
@@ -60,6 +63,12 @@
 <style scoped lang="scss">
 .el-table {
   margin-bottom: 20px;
+}
+.extraSummary {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 120px;
 }
 </style>
 
@@ -146,6 +155,7 @@ export default {
       row.typeDisplay = display
       row.cssClazz = cssClazz
       row.extraDisplay = extraDisplay
+      row.extraSummary = extraDisplay.split('<br />')[0]
       return display
     },
     onClickPage(val) {
@@ -171,12 +181,12 @@ export default {
         path: '/point/rec/log/list',
         query: {
           pointType: this.pointType,
-          pid : this.pid,
+          pid: this.pid,
           uid: this.uid,
           seqNum: pointLog.seqNum
         }
       })
-    }    
+    }
   }
 }
 </script>
