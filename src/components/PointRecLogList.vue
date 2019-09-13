@@ -155,10 +155,11 @@ export default {
         for (let [key, value] of Object.entries(row.extra)) {
           extraDisplay = extraDisplay + key + ' : ' + value + '<br />'
         }
+        row.extraDisplay = extraDisplay
+        row.extraSummary = extraDisplay.split('<br />')[0]
       }
       row.typeDisplay = display
       row.cssClazz = cssClazz
-      row.extraDisplay = extraDisplay
       return display
     },
     onClickPage(val) {
