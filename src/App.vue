@@ -51,4 +51,7 @@ span.cancel {
   // 作废积分
   color: gray;
 }
+span.refund {
+  color: gray;
+}
 </style>

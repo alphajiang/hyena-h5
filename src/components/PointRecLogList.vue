@@ -44,6 +44,7 @@
       <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
+      <el-table-column prop="refund" label="退款" align="right" width="80"></el-table-column>
       <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
       <el-table-column prop="cost" label="成本" align="right" width="150"></el-table-column>
       <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
@@ -149,6 +150,9 @@ export default {
       } else if (value === 6) {
         display = '作废'
         cssClazz = 'cancel'
+      } else if (value === 7) {
+        display = '退款'
+        cssClazz = 'refund'
       }
       if (row.extra != null) {
         var extraDisplay = ''
