@@ -24,14 +24,14 @@
       <el-table-column prop="usedCost" label="已使用成本" align="right" width="150"></el-table-column>
       <el-table-column prop="frozenCost" label="已冻结成本" align="right" width="100"></el-table-column>
       <el-table-column prop="refundCost" label="已退款成本" align="right" width="150"></el-table-column>
-      <el-table-column label="有效" align='center' width="60">
+      <el-table-column label="有效" align="center" width="60">
         <template slot-scope="s">{{s.row.enable | formatStatus}}</template>
       </el-table-column>
       <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="tag" label="标签" width="150"></el-table-column>
       <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
       <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
-      <el-table-column prop="payType" label="payType" width="60"></el-table-column>      
+      <el-table-column prop="payType" label="payType" width="60"></el-table-column>
       <el-table-column prop="issueTime" label="发放时间" width="150"></el-table-column>
       <el-table-column prop="expireTime" label="有效期" width="150"></el-table-column>
       <el-table-column label="操作">

@@ -8,23 +8,23 @@
         } }"
       >{{pointType}}</el-breadcrumb-item>
       <template v-if="pointRecId">
-      <el-breadcrumb-item 
-        :to="{ path: '/point/rec/list', query: {
+        <el-breadcrumb-item
+          :to="{ path: '/point/rec/list', query: {
           pointType: pointType,
           uid: uid
         } }"
-      >积分块 ({{uid}})</el-breadcrumb-item>
-      <el-breadcrumb-item >使用详情 ({{pointRecId}})</el-breadcrumb-item>
+        >积分块 ({{uid}})</el-breadcrumb-item>
+        <el-breadcrumb-item>使用详情 ({{pointRecId}})</el-breadcrumb-item>
       </template>
       <template v-if="seqNum">
-      <el-breadcrumb-item 
-        :to="{ path: '/point/log/list', query: {
+        <el-breadcrumb-item
+          :to="{ path: '/point/log/list', query: {
           pointType: pointType,
           uid: uid
         } }"
-      >流水 ({{uid}})</el-breadcrumb-item>
-      <el-breadcrumb-item >块详情 ({{seqNum}})</el-breadcrumb-item>
-      </template>      
+        >流水 ({{uid}})</el-breadcrumb-item>
+        <el-breadcrumb-item>块详情 ({{seqNum}})</el-breadcrumb-item>
+      </template>
     </el-breadcrumb>
 
     <el-table :data="points" stripe>
@@ -56,7 +56,7 @@
       <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
       <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
-      <el-table-column prop="payType" label="payType" width="60"></el-table-column>      
+      <el-table-column prop="payType" label="payType" width="60"></el-table-column>
       <el-table-column prop="note" label="备注" width="200"></el-table-column>
     </el-table>
     <el-pagination
