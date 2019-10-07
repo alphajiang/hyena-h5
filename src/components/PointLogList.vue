@@ -10,36 +10,44 @@
       <el-breadcrumb-item>流水 ({{uid}})</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <el-table :data="points" stripe>
+    <el-table :data="points" stripe size="medium" fit="true">
       <el-table-column fixed type="index" width="40"></el-table-column>
-      <el-table-column prop="createTime" fixed label="时间" width="100"></el-table-column>
-      <el-table-column label="变动" fixed width="50">
+      <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>
+      <el-table-column label="变动" fixed width="50" header-align="center">
         <template slot-scope="scope">
           <span :class="scope.row.cssClazz">{{scope.row.typeDisplay}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="变更" align="right" width="150">
+      <el-table-column label="变更" fixed align="right" width="100" header-align="center">
         <template slot-scope="scope">
           <span :class="scope.row.cssClazz">{{scope.row.delta}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="point" label="有效积分" align="right" width="150"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="80"></el-table-column>
-      <el-table-column prop="expire" label="过期" align="right" width="150"></el-table-column>
-      <el-table-column prop="deltaCost" label="变更成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="cost" label="成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="frozenCost" label="冻结成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
-      <el-table-column prop="tag" label="标签" width="100"></el-table-column>
-      <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
-      <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
-      <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
-      <el-table-column prop="payType" label="payType" width="60"></el-table-column>
-      <el-table-column prop="note" label="备注" width="200"></el-table-column>
-      <el-table-column label="额外信息" width="200">
+      <el-table-column prop="point" label="有效积分" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="refund" label="退款" align="right" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="expire" label="过期" align="right" width="80" header-align="center"></el-table-column>
+      <el-table-column label="成本" header-align="center">
+        <el-table-column prop="deltaCost" label="变更" align="right" width="80" header-align="center"></el-table-column>
+        <el-table-column prop="cost" label="有效" align="right" width="100" header-align="center"></el-table-column>
+        <el-table-column
+          prop="frozenCost"
+          label="冻结"
+          align="right"
+          width="100"
+          header-align="center"
+        ></el-table-column>
+      </el-table-column>
+      <el-table-column prop="orderNo" label="单号" width="120" header-align="center"></el-table-column>
+      <el-table-column prop="tag" label="标签" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="seqNum" label="seq" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="sourceType" label="sourceType" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="orderType" label="orderType" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="payType" label="payType" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="note" label="备注" width="200" header-align="center"></el-table-column>
+      <el-table-column label="额外信息" width="180" header-align="center">
         <template slot-scope="scope">
           <el-popover placement="top-start" title width="200" trigger="hover" content>
             <div v-html="scope.row.extraDisplay"></div>
@@ -47,7 +55,7 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="操作" header-align="center">
         <template slot-scope="scope">
           <el-button size="mini" @click="showDetail(scope.$index, scope.row)">块详情</el-button>
         </template>

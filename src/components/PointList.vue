@@ -21,20 +21,35 @@
         <el-button slot="append" icon="el-icon-search" @click="searchPoints"></el-button>
       </el-input>
     </div>
-    <el-table :data="points" stripe>
-      <el-table-column fixed type="index" width="50"></el-table-column>
-      <el-table-column prop="uid" label="UID" fixed width="100"></el-table-column>
-      <el-table-column prop="name" label="名称" fixed width="180"></el-table-column>
-      <el-table-column prop="point" label="有效积分" align="right" width="150"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="100"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="150"></el-table-column>
-      <el-table-column prop="cost" label="可用成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="frozenCost" label="冻结成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
-      <el-table-column prop="seqNum" label="seq" align="right" width="60"></el-table-column>
-      <el-table-column label="操作">
+    <el-table
+      :data="points"
+      stripe
+      size="medium"
+      border="true"
+      fit="true"
+      highlight-current-row="true"
+    >
+      <el-table-column fixed type="index" width="40"></el-table-column>
+      <el-table-column prop="uid" label="UID" fixed width="100" header-align="center"></el-table-column>
+      <el-table-column prop="name" label="名称" fixed width="160" header-align="center"></el-table-column>
+      <el-table-column prop="point" label="有效积分" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="refund" label="退款" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column label="成本" header-align="center">
+        <el-table-column prop="cost" label="有效" align="right" width="100" header-align="center"></el-table-column>
+        <el-table-column
+          prop="frozenCost"
+          label="冻结"
+          align="right"
+          width="100"
+          header-align="center"
+        ></el-table-column>
+      </el-table-column>
+      <el-table-column prop="seqNum" label="seq" align="right" width="60" header-align="center"></el-table-column>
+      <el-table-column label="操作" width="200" header-align="center">
         <template slot-scope="scope">
           <el-button size="mini" @click="showPointLogList(scope.$index, scope.row)">流水</el-button>
           <el-button size="mini" @click="showPointRecList(scope.$index, scope.row)">积分块</el-button>
@@ -84,6 +99,7 @@
 div.head-icon {
   float: left;
   margin-right: 30px;
+  margin-bottom: 10px;
 }
 </style>
 

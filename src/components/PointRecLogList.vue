@@ -27,37 +27,64 @@
       </template>
     </el-breadcrumb>
 
-    <el-table :data="points" stripe>
+    <el-table
+      :data="points"
+      stripe
+      size="medium"
+      border="true"
+      fit="true"
+      highlight-current-row="true"
+    >
       <el-table-column fixed type="index" width="30"></el-table-column>
-      <el-table-column prop="createTime" fixed label="时间" width="100"></el-table-column>
-      <el-table-column label="变动" fixed width="50">
+      <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>
+      <el-table-column label="变动" fixed width="50" header-align="center">
         <template slot-scope="scope">
           <span :class="scope.row.cssClazz">{{scope.row.typeDisplay}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="变更" align="right" width="150">
+      <el-table-column label="变更" fixed align="right" width="100" header-align="center">
         <template slot-scope="scope">
           <span :class="scope.row.cssClazz">{{scope.row.delta}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
-      <el-table-column prop="total" label="块总数" align="right" width="150"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="80"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
-      <el-table-column prop="deltaCost" label="变动成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="cost" label="总成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="frozenCost" label="冻结成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="usedCost" label="已用成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="refundCost" label="已退成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="recId" label="块ID" width="60"></el-table-column>
-      <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
-      <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
-      <el-table-column prop="orderType" label="orderType" width="60"></el-table-column>
-      <el-table-column prop="payType" label="payType" width="60"></el-table-column>
-      <el-table-column prop="note" label="备注" width="200"></el-table-column>
+      <el-table-column prop="seqNum" label="seq" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="total" label="块总数" align="right" width="120" header-align="center"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="120" header-align="center"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="120" header-align="center"></el-table-column>
+      <el-table-column prop="refund" label="退款" align="right" width="80" header-align="center"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="120" header-align="center"></el-table-column>
+      <el-table-column label="成本" header-align="center">
+        <el-table-column
+          prop="deltaCost"
+          label="变动"
+          align="right"
+          width="120"
+          header-align="center"
+        ></el-table-column>
+        <el-table-column prop="cost" label="总数" align="right" width="120" header-align="center"></el-table-column>
+        <el-table-column
+          prop="frozenCost"
+          label="冻结"
+          align="right"
+          width="120"
+          header-align="center"
+        ></el-table-column>
+        <el-table-column prop="usedCost" label="已用" align="right" width="120" header-align="center"></el-table-column>
+        <el-table-column
+          prop="refundCost"
+          label="已退"
+          align="right"
+          width="120"
+          header-align="center"
+        ></el-table-column>
+      </el-table-column>
+      <el-table-column prop="recId" label="块ID" width="80" header-align="center"></el-table-column>
+      <el-table-column prop="orderNo" label="单号" width="150" header-align="center"></el-table-column>
+      <el-table-column prop="sourceType" label="sourceType" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="orderType" label="orderType" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="payType" label="payType" width="60" header-align="center"></el-table-column>
+      <el-table-column prop="note" label="备注" width="200" header-align="center"></el-table-column>
     </el-table>
     <el-pagination
       background
