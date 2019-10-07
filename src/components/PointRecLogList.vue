@@ -40,14 +40,18 @@
           <span :class="scope.row.cssClazz">{{scope.row.delta}}</span>
         </template>
       </el-table-column>
+      <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
       <el-table-column prop="total" label="块总数" align="right" width="150"></el-table-column>
       <el-table-column prop="available" label="可用" align="right" width="150"></el-table-column>
       <el-table-column prop="frozen" label="冻结" align="right" width="80"></el-table-column>
       <el-table-column prop="used" label="已使用" align="right" width="150"></el-table-column>
       <el-table-column prop="refund" label="退款" align="right" width="80"></el-table-column>
       <el-table-column prop="expire" label="已过期" align="right" width="150"></el-table-column>
-      <el-table-column prop="cost" label="成本" align="right" width="150"></el-table-column>
-      <el-table-column prop="seqNum" label="seq" width="60"></el-table-column>
+      <el-table-column prop="deltaCost" label="变动成本" align="right" width="150"></el-table-column>
+      <el-table-column prop="cost" label="总成本" align="right" width="150"></el-table-column>
+      <el-table-column prop="frozenCost" label="冻结成本" align="right" width="150"></el-table-column>
+      <el-table-column prop="usedCost" label="已用成本" align="right" width="150"></el-table-column>
+      <el-table-column prop="refundCost" label="已退成本" align="right" width="150"></el-table-column>
       <el-table-column prop="recId" label="块ID" width="60"></el-table-column>
       <el-table-column prop="orderNo" label="单号" width="150"></el-table-column>
       <el-table-column prop="sourceType" label="sourceType" width="60"></el-table-column>
