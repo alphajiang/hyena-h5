@@ -10,6 +10,18 @@
       <el-breadcrumb-item>流水 ({{uid}})</el-breadcrumb-item>
     </el-breadcrumb>
 
+    <div class="head-icon">
+      <el-input
+        placeholder="搜索订单号"
+        size="small"
+        clearable
+        prefix-icon="el-icon-search"
+        v-model="sk"
+        @clear="searchPoints"
+      >
+        <el-button slot="append" icon="el-icon-search" @click="searchPoints"></el-button>
+      </el-input>
+    </div>
     <el-table :data="points" stripe size="medium" fit="true">
       <el-table-column fixed type="index" width="40"></el-table-column>
       <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>
@@ -64,6 +76,7 @@
     <el-pagination
       background
       layout="prev, pager, next"
+      :current-page="page"
       :total="total"
       :page-size="pageSize"
       @current-change="onClickPage"
@@ -80,6 +93,11 @@
   overflow: hidden;
   white-space: nowrap;
   width: 120px;
+}
+div.head-icon {
+  float: left;
+  margin-right: 30px;
+  margin-bottom: 10px;
 }
 </style>
 
@@ -105,15 +123,29 @@ export default {
       points: [],
       total: 0,
       page: 1,
-      pageSize: 10
+      pageSize: 10,
+      sk: ''
+    }
+  },
+  beforeMount: function() {
+    let lastUid = sessionStorage.getItem('POINT_LOG_UID')
+    if (lastUid === this.uid) {
+      this.page = parseInt(sessionStorage.getItem('POINT_LOG_PAGE'))
+      if (isNaN(this.page)) {
+        this.page = 1
+      }
+      this.sk = sessionStorage.getItem('POINT_LOG_SK')
     }
   },
   mounted: function() {
     // this.showDialog = false;
-
     this.loadPoints()
   },
-
+  beforeDestroy: function() {
+    sessionStorage.setItem('POINT_LOG_UID', this.uid)
+    sessionStorage.setItem('POINT_LOG_PAGE', this.page)
+    sessionStorage.setItem('POINT_LOG_SK', this.sk)
+  },
   methods: {
     loadPoints() {
       this.$http({
@@ -122,6 +154,7 @@ export default {
         data: JSON.stringify({
           type: this.pointType,
           uid: this.uid,
+          orderNo: this.sk,
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize
         })
@@ -175,6 +208,10 @@ export default {
     onClickPage(val) {
       console.info(val)
       this.page = val
+      this.loadPoints()
+    },
+    searchPoints() {
+      this.page = 1
       this.loadPoints()
     },
     onClickAddPoint(formName) {
