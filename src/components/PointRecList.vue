@@ -9,7 +9,7 @@
       >{{pointType}}</el-breadcrumb-item>
       <el-breadcrumb-item>积分块 ({{uid}})</el-breadcrumb-item>
     </el-breadcrumb>
-
+    <!--
     <el-table
       :data="points"
       stripe
@@ -79,12 +79,205 @@
       :page-size="pageSize"
       @current-change="onClickPage"
     ></el-pagination>
+    -->
+    <ul
+      class="infinite-list"
+      v-infinite-scroll="loadPointRecList"
+      infinite-scroll-disabled="disabled"
+      style="overflow:auto"
+    >
+      <el-card
+        class="box-card"
+        v-for="(item) in points"
+        v-bind:key="item"
+        body-style="{padding:'10px'}"
+      >
+        <div slot="header" class="clearfix">
+          <div class="left">{{item.idx}}</div>
+          <div class="center">
+            <span>块ID: {{item.id}}</span>
+          </div>
+          <div class="right">{{item.statusDisplay}}</div>
+        </div>
+        <div class="sub-title">
+          <span class="left bold">创建</span>
+          <span class="right">{{item.issueTime}}</span>
+        </div>
+        <div>
+          <div class="item two-col">
+            <span class="title">单号:</span>
+            <span>{{item.orderNo}}</span>
+          </div>
+          <div class="item">
+            <span class="title">序号:</span>
+            <span>{{item.seqNum}}</span>
+          </div>
+        </div>
+        <div>
+          <div class="item three-col">
+            <span class="title">标签:</span>
+            <span>{{item.tag}}</span>
+          </div>
+        </div>
+        <div class="sub-title bold">基础信息</div>
+        <div>
+          <div class="item">
+            <span class="title">总数:</span>
+            <span>{{item.total}}</span>
+          </div>
+          <div class="item">
+            <span class="title">可用:</span>
+            <span>{{item.available}}</span>
+          </div>
+          <div class="item">
+            <span class="title">冻结:</span>
+            <span>{{item.frozen}}</span>
+          </div>
+        </div>
+        <div>
+          <div class="item">
+            <span class="title">已使用:</span>
+            <span>{{item.used}}</span>
+          </div>
+          <div class="item">
+            <span class="title">退款:</span>
+            <span>{{item.refund}}</span>
+          </div>
+          <div class="item">
+            <span class="title">已过期:</span>
+            <span>{{item.expire}}</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="item three-col">
+            <span class="title">有效期:</span>
+            <span>{{item.expireTime}}</span>
+          </div>
+        </div>
+        <div class="sub-title bold">成本</div>
+        <div>
+          <div class="item">
+            <span class="title">总成本:</span>
+            <span>{{item.totalCost}}</span>
+          </div>
+          <div class="item">
+            <span class="title">可用:</span>
+            <span>{{item.cost}}</span>
+          </div>
+          <div class="item">
+            <span class="title">冻结:</span>
+            <span>{{item.frozenCost}}</span>
+          </div>
+        </div>
+        <div>
+          <div class="item">
+            <span class="title">已使用:</span>
+            <span>{{item.usedCost}}</span>
+          </div>
+          <div class="item">
+            <span class="title">已退款:</span>
+            <span>{{item.refundCost}}</span>
+          </div>
+        </div>
+        <div class="sub-title bold">其他</div>
+        <div>
+          <div class="item">
+            <span class="title">来源:</span>
+            <span>{{item.sourceType}}</span>
+          </div>
+          <div class="item">
+            <span class="title">订单类型:</span>
+            <span>{{item.orderType}}</span>
+          </div>
+          <div class="item">
+            <span class="title">支付类型:</span>
+            <span>{{item.payType}}</span>
+          </div>
+        </div>
+        <div class="bn-line">
+          <el-button class="right" size="mini" @click="showDetail(0, item)">块流水</el-button>
+        </div>
+      </el-card>
+    </ul>
+
+    <p v-if="loading">加载中...</p>
+    <p v-if="noMore">没有更多了</p>
   </div>
 </template>
 
 <style scoped lang="scss">
 .el-table {
   margin-bottom: 20px;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: '';
+}
+div.left {
+  float: left;
+}
+div.right {
+  float: right;
+}
+.box-card .clearfix {
+  text-align: center;
+}
+
+.box-card .sub-title {
+  display: inline-block;
+  font-size: 14px;
+  width: 95%;
+  padding: 5px 10px 5px 10px;
+  border: 1px solid #b4ddea;
+  background: #f7faff;
+  margin-bottom: 5px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.box-card .sub-title span {
+  display: inline-block;
+}
+.right {
+  float: right;
+}
+.center {
+  display: inline-block;
+}
+.box-card .item {
+  float: left;
+  width: 33%;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.box-card .two-col {
+  width: 66%;
+}
+.box-card .three-col {
+  width: 99%;
+}
+.box-card {
+  width: 480px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+span.title {
+  display: inline-block;
+  width: 60px;
+  color: #909399;
+  font-weight: bold;
+  font-size: 13px;
+}
+.bn-line {
+  float: right;
+  padding: 10px 20px 10px 0px;
 }
 </style>
 
@@ -105,14 +298,24 @@ export default {
   },
   data: function() {
     return {
+      loading: false,
       clickable: true,
       showDialog: false,
       points: [],
       total: 0,
-      page: 1,
+      idx: 1,
+      start: 0,
       pageSize: 10
     }
   },
+  // computed: {
+  //   noMore() {
+  //     return this.count >= 20
+  //   },
+  //   disabled() {
+  //     return this.loading || this.noMore
+  //   }
+  // },
   filters: {
     formatStatus: function(arg) {
       if (arg === true) {
@@ -129,18 +332,23 @@ export default {
   methods: {
     loadPointRecList() {
       this.$http({
-        method: 'get',
+        method: 'post',
         url: '/api/hyena/point/listPointRecord',
-        params: {
+        data: JSON.stringify({
           type: this.pointType,
           uid: this.uid,
-          start: (this.page - 1) * this.pageSize,
+          start: this.start,
           size: this.pageSize
-        }
+        })
       }).then(res => {
         console.log(res)
         this.points = res.data.data
         this.total = res.data.total
+        this.points.forEach(rec => {
+          rec.idx = this.idx++
+          rec.cost = rec.totalCost - rec.usedCost - rec.refundCost
+          rec.statusDisplay = rec.enable === true ? '有效' : '失效'
+        })
       })
     },
     onClickPage(val) {
