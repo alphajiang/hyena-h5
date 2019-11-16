@@ -19,16 +19,18 @@
       >
         <el-card
           class="box-card"
+          v-bind:class="{ exhaust: !item.enable }"
           v-for="item in points"
           v-bind:key="item.id"
           body-style="{padding:'10px'}"
         >
-          <div slot="header" class="clearfix">
+          <div slot="header" class="clearfix" >
             <div class="left">{{item.idx}}</div>
             <div class="center">
               <span>块ID: {{item.id}}</span>
             </div>
-            <div class="right">{{item.statusDisplay}}</div>
+            <div class="right" v-if="item.enable">有效</div>
+            <div class="right " v-if="!item.enable">失效</div>
           </div>
           <div class="sub-title">
             <span class="left bold">创建信息</span>
@@ -140,7 +142,9 @@
 .el-table {
   margin-bottom: 20px;
 }
-
+.exhaust {
+  color: gray;
+}
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -282,7 +286,6 @@ export default {
         res.data.data.forEach(rec => {
           rec.idx = this.idx++
           rec.cost = rec.totalCost - rec.usedCost - rec.refundCost
-          rec.statusDisplay = rec.enable === true ? '有效' : '失效'
           this.points.push(rec)
         })
         this.loading = false
