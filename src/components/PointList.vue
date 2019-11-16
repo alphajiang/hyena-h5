@@ -25,9 +25,9 @@
       :data="points"
       stripe
       size="medium"
-      border="true"
-      fit="true"
-      highlight-current-row="true"
+      border
+      fit
+      highlight-current-row
     >
       <el-table-column fixed type="index" width="40"></el-table-column>
       <el-table-column prop="uid" label="UID" fixed width="100" header-align="center"></el-table-column>

@@ -31,9 +31,9 @@
       :data="points"
       stripe
       size="medium"
-      border="true"
-      fit="true"
-      highlight-current-row="true"
+      border
+      fit
+      highlight-current-row
     >
       <el-table-column fixed type="index" width="30"></el-table-column>
       <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>

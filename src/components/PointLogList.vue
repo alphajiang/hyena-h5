@@ -22,7 +22,7 @@
         <el-button slot="append" icon="el-icon-search" @click="searchPoints"></el-button>
       </el-input>
     </div>
-    <el-table :data="points" stripe size="medium" fit="true">
+    <el-table :data="points" stripe size="medium" fit>
       <el-table-column fixed type="index" width="40"></el-table-column>
       <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>
       <el-table-column label="变动" fixed width="50" header-align="center">
