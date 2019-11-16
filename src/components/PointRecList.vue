@@ -31,7 +31,7 @@
             <div class="right">{{item.statusDisplay}}</div>
           </div>
           <div class="sub-title">
-            <span class="left bold">创建</span>
+            <span class="left bold">创建信息</span>
             <span class="right">{{item.issueTime}}</span>
           </div>
           <div>
@@ -194,6 +194,7 @@ div.right {
 }
 .box-card {
   display: inline-block;
+  vertical-align: top;
   width: 480px;
   margin-right: 20px;
   margin-bottom: 20px;
