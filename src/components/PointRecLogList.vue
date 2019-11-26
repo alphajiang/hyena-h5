@@ -146,7 +146,7 @@ export default {
           type: this.pointType,
           uid: this.uid,
           seqNum: this.seqNum,
-          recId: this.pointRecId,
+          recIdList: [this.pointRecId],
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize
         })
