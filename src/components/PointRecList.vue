@@ -285,7 +285,7 @@ export default {
         this.total = res.data.total
         res.data.data.forEach(rec => {
           rec.idx = this.idx++
-          rec.cost = rec.totalCost - rec.usedCost - rec.refundCost
+          rec.cost = rec.totalCost - rec.usedCost - rec.refundCost - rec.frozenCost
           this.points.push(rec)
         })
         this.loading = false
