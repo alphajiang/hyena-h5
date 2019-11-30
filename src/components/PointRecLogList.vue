@@ -139,17 +139,20 @@ export default {
   },
   methods: {
     loadPointRecLogList() {
+	  var param = {
+		  type: this.pointType,
+		  uid: this.uid,
+		  seqNum: this.seqNum,		  
+		  start: (this.page - 1) * this.pageSize,
+		  size: this.pageSize
+		}
+		if ( this.pointRecId ) {
+		param.recIdList = [this.pointRecId]
+		}
       this.$http({
         method: 'post',
         url: '/api/hyena/point/listPointRecordLog',
-        data: JSON.stringify({
-          type: this.pointType,
-          uid: this.uid,
-          seqNum: this.seqNum,
-          recIdList: [this.pointRecId],
-          start: (this.page - 1) * this.pageSize,
-          size: this.pageSize
-        })
+        data: JSON.stringify(param)
       }).then(res => {
         console.log(res)
         this.points = res.data.data
