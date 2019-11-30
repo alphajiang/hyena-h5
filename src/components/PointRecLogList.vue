@@ -141,13 +141,15 @@ export default {
     loadPointRecLogList() {
 	  var param = {
 		  type: this.pointType,
-		  uid: this.uid,
-		  seqNum: this.seqNum,		  
+		  uid: this.uid,	  
 		  start: (this.page - 1) * this.pageSize,
 		  size: this.pageSize
 		}
 		if ( this.pointRecId ) {
 		param.recIdList = [this.pointRecId]
+		}
+		if(this.seqNum) {
+		param.seqNumList = [this.seqNum]
 		}
       this.$http({
         method: 'post',
