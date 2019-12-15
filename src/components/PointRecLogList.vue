@@ -27,14 +27,7 @@
       </template>
     </el-breadcrumb>
 
-    <el-table
-      :data="points"
-      stripe
-      size="medium"
-      border
-      fit
-      highlight-current-row
-    >
+    <el-table :data="points" stripe size="medium" border fit highlight-current-row>
       <el-table-column fixed type="index" width="30"></el-table-column>
       <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>
       <el-table-column label="变动" fixed width="50" header-align="center">
@@ -48,12 +41,54 @@
         </template>
       </el-table-column>
       <el-table-column prop="seqNum" label="seq" width="60" header-align="center"></el-table-column>
-      <el-table-column prop="total" label="块总数" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column
+        prop="total"
+        label="块总数"
+        align="right"
+        width="120"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="available"
+        label="可用"
+        align="right"
+        width="120"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="frozen"
+        label="冻结"
+        align="right"
+        width="80"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="used"
+        label="已使用"
+        align="right"
+        width="120"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="refund"
+        label="退款"
+        align="right"
+        width="80"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="expire"
+        label="已过期"
+        align="right"
+        width="120"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
       <el-table-column label="成本" header-align="center">
         <el-table-column
           prop="deltaCost"
@@ -61,25 +96,39 @@
           align="right"
           width="120"
           header-align="center"
-           :formatter="formatScale2"
+          :formatter="formatScale2"
         ></el-table-column>
-        <el-table-column prop="cost" label="总数" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
+        <el-table-column
+          prop="cost"
+          label="总数"
+          align="right"
+          width="120"
+          header-align="center"
+          :formatter="formatScale2"
+        ></el-table-column>
         <el-table-column
           prop="frozenCost"
           label="冻结"
           align="right"
           width="120"
           header-align="center"
-           :formatter="formatScale2"
+          :formatter="formatScale2"
         ></el-table-column>
-        <el-table-column prop="usedCost" label="已用" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
+        <el-table-column
+          prop="usedCost"
+          label="已用"
+          align="right"
+          width="120"
+          header-align="center"
+          :formatter="formatScale2"
+        ></el-table-column>
         <el-table-column
           prop="refundCost"
           label="已退"
           align="right"
           width="120"
           header-align="center"
-           :formatter="formatScale2"
+          :formatter="formatScale2"
         ></el-table-column>
       </el-table-column>
       <el-table-column prop="recId" label="块ID" width="80" header-align="center"></el-table-column>
@@ -142,18 +191,18 @@ export default {
   },
   methods: {
     loadPointRecLogList() {
-	  var param = {
-		  type: this.pointType,
-		  uid: this.uid,	  
-		  start: (this.page - 1) * this.pageSize,
-		  size: this.pageSize
-		}
-		if ( this.pointRecId ) {
-		param.recIdList = [this.pointRecId]
-		}
-		if(this.seqNum) {
-		param.seqNumList = [this.seqNum]
-		}
+      var param = {
+        type: this.pointType,
+        uid: this.uid,
+        start: (this.page - 1) * this.pageSize,
+        size: this.pageSize
+      }
+      if (this.pointRecId) {
+        param.recIdList = [this.pointRecId]
+      }
+      if (this.seqNum) {
+        param.seqNumList = [this.seqNum]
+      }
       this.$http({
         method: 'post',
         url: '/api/hyena/point/listPointRecordLog',
