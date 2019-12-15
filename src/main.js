@@ -10,6 +10,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.config.productionTip = false
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 Vue.prototype.$http = axios
+Vue.prototype.formatScale2 = function(row, column, cellVal) {
+  // console.info(cellVal)
+  if (cellVal === 0) {
+    return 0
+  }
+  return cellVal.toFixed(2)
+}
 Vue.use(ElementUI)
 
 new Vue({

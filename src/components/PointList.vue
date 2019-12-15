@@ -32,20 +32,21 @@
       <el-table-column fixed type="index" width="40"></el-table-column>
       <el-table-column prop="uid" label="UID" fixed width="100" header-align="center"></el-table-column>
       <el-table-column prop="name" label="名称" fixed width="160" header-align="center"></el-table-column>
-      <el-table-column prop="point" label="有效积分" align="right" width="100" header-align="center"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="100" header-align="center"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="100" header-align="center"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="100" header-align="center"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="100" header-align="center"></el-table-column>
+      <el-table-column prop="point" label="有效积分" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="refund" label="退款" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
       <el-table-column label="成本" header-align="center">
-        <el-table-column prop="cost" label="有效" align="right" width="100" header-align="center"></el-table-column>
+        <el-table-column prop="cost" label="有效" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
         <el-table-column
           prop="frozenCost"
           label="冻结"
           align="right"
           width="100"
           header-align="center"
+          :formatter="formatScale2"
         ></el-table-column>
       </el-table-column>
       <el-table-column prop="seqNum" label="seq" align="right" width="60" header-align="center"></el-table-column>

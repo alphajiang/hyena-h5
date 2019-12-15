@@ -44,16 +44,16 @@
       </el-table-column>
       <el-table-column label="变更" fixed align="right" width="100" header-align="center">
         <template slot-scope="scope">
-          <span :class="scope.row.cssClazz">{{scope.row.delta}}</span>
+          <span :class="scope.row.cssClazz">{{scope.row.delta.toFixed(2)}}</span>
         </template>
       </el-table-column>
       <el-table-column prop="seqNum" label="seq" width="60" header-align="center"></el-table-column>
-      <el-table-column prop="total" label="块总数" align="right" width="120" header-align="center"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="120" header-align="center"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="120" header-align="center"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="80" header-align="center"></el-table-column>
-      <el-table-column prop="expire" label="已过期" align="right" width="120" header-align="center"></el-table-column>
+      <el-table-column prop="total" label="块总数" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="available" label="可用" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="frozen" label="冻结" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="used" label="已使用" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="refund" label="退款" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column prop="expire" label="已过期" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
       <el-table-column label="成本" header-align="center">
         <el-table-column
           prop="deltaCost"
@@ -61,22 +61,25 @@
           align="right"
           width="120"
           header-align="center"
+           :formatter="formatScale2"
         ></el-table-column>
-        <el-table-column prop="cost" label="总数" align="right" width="120" header-align="center"></el-table-column>
+        <el-table-column prop="cost" label="总数" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
         <el-table-column
           prop="frozenCost"
           label="冻结"
           align="right"
           width="120"
           header-align="center"
+           :formatter="formatScale2"
         ></el-table-column>
-        <el-table-column prop="usedCost" label="已用" align="right" width="120" header-align="center"></el-table-column>
+        <el-table-column prop="usedCost" label="已用" align="right" width="120" header-align="center" :formatter="formatScale2"></el-table-column>
         <el-table-column
           prop="refundCost"
           label="已退"
           align="right"
           width="120"
           header-align="center"
+           :formatter="formatScale2"
         ></el-table-column>
       </el-table-column>
       <el-table-column prop="recId" label="块ID" width="80" header-align="center"></el-table-column>
