@@ -12,7 +12,10 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 Vue.prototype.$http = axios
 Vue.prototype.formatScale2 = function(row, column, cellVal) {
   // console.info(cellVal)
-  if (cellVal === 0) {
+  if (typeof cellVal === 'undefined' || cellVal === null ){
+	  return '';
+  }
+  else if (cellVal === 0) {
     return 0
   }
   return cellVal.toFixed(2)
