@@ -31,6 +31,7 @@
     >
       <el-table-column fixed type="index" width="40"></el-table-column>
       <el-table-column prop="uid" label="UID" fixed width="100" header-align="center"></el-table-column>
+      <el-table-column prop="subUid" label="sub-UID" fixed width="100" header-align="center"></el-table-column>
       <el-table-column prop="name" label="名称" fixed width="160" header-align="center"></el-table-column>
       <el-table-column prop="point" label="有效积分" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
       <el-table-column prop="available" label="可用" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
@@ -227,7 +228,8 @@ export default {
         path: '/point/rec/list',
         query: {
           pointType: this.pointType,
-          uid: point.uid
+          uid: point.uid,
+          subUid: point.subUid
         }
       })
     },
@@ -237,7 +239,8 @@ export default {
         path: '/point/log/list',
         query: {
           pointType: this.pointType,
-          uid: point.uid
+          uid: point.uid,
+          subUid: point.subUid
         }
       })
     }

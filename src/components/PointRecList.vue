@@ -7,7 +7,7 @@
           pointType: pointType
         } }"
       >{{pointType}}</el-breadcrumb-item>
-      <el-breadcrumb-item>积分块 ({{uid}})</el-breadcrumb-item>
+      <el-breadcrumb-item>积分块 ({{uid}}-{{subUid}})</el-breadcrumb-item>
     </el-breadcrumb>
     <div >
       <div
@@ -230,6 +230,9 @@ export default {
     uid() {
       return this.$route.query.uid
     },
+    subUid() {
+      return this.$route.query.subUid
+    },
     noMore() {
       return this.loadMore !== true
     },
@@ -272,6 +275,7 @@ export default {
         data: JSON.stringify({
           type: this.pointType,
           uid: this.uid,
+          subUid: this.subUid,
           start: this.start,
           size: this.pageSize
         })
@@ -303,7 +307,8 @@ export default {
         path: '/point/rec/log/list',
         query: {
           pointType: this.pointType,
-          uid: pointRec.uid,
+          uid: this.uid,
+          subUid: this.subUid,
           pointRecId: pointRec.id
         }
       })

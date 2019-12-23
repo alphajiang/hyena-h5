@@ -13,7 +13,7 @@
           pointType: pointType,
           uid: uid
         } }"
-        >积分块 ({{uid}})</el-breadcrumb-item>
+        >积分块 ({{uid}}-{{subUid}})</el-breadcrumb-item>
         <el-breadcrumb-item>使用详情 ({{pointRecId}})</el-breadcrumb-item>
       </template>
       <template v-if="seqNum">
@@ -168,6 +168,9 @@ export default {
     uid() {
       return this.$route.query.uid
     },
+    subUid() {
+      return this.$route.query.subUid
+    },
     seqNum() {
       return this.$route.query.seqNum
     },
@@ -194,6 +197,7 @@ export default {
       var param = {
         type: this.pointType,
         uid: this.uid,
+        subUid: this.subUid,
         start: (this.page - 1) * this.pageSize,
         size: this.pageSize
       }

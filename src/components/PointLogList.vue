@@ -7,7 +7,7 @@
           pointType: pointType
         } }"
       >{{pointType}}</el-breadcrumb-item>
-      <el-breadcrumb-item>流水 ({{uid}})</el-breadcrumb-item>
+      <el-breadcrumb-item>流水 ({{uid}}-{{subUid}})</el-breadcrumb-item>
     </el-breadcrumb>
 
     <div class="head-icon">
@@ -115,6 +115,9 @@ export default {
     },
     uid() {
       return this.$route.query.uid
+    },
+    subUid() {
+      return this.$route.query.subUid
     }
   },
   data: function() {
@@ -155,6 +158,7 @@ export default {
         data: JSON.stringify({
           type: this.pointType,
           uid: this.uid,
+          subUid: this.subUid,
           orderNo: this.sk,
           start: (this.page - 1) * this.pageSize,
           size: this.pageSize
@@ -235,6 +239,7 @@ export default {
           pointType: this.pointType,
           pid: this.pid,
           uid: this.uid,
+          subUid: this.subUid,
           seqNum: pointLog.seqNum
         }
       })
