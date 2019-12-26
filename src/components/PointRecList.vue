@@ -56,29 +56,29 @@
           <div>
             <div class="item">
               <span class="title">总数:</span>
-              <span>{{item.total}}</span>
+              <span>{{item.total  | formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">可用:</span>
-              <span>{{item.available}}</span>
+              <span>{{item.available| formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">冻结:</span>
-              <span>{{item.frozen}}</span>
+              <span>{{item.frozen | formatScale2}}</span>
             </div>
           </div>
           <div>
             <div class="item">
               <span class="title">已使用:</span>
-              <span>{{item.used}}</span>
+              <span>{{item.used | formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">退款:</span>
-              <span>{{item.refund}}</span>
+              <span>{{item.refund | formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">已过期:</span>
-              <span>{{item.expire}}</span>
+              <span>{{item.expire | formatScale2}}</span>
             </div>
           </div>
 
@@ -92,25 +92,25 @@
           <div>
             <div class="item">
               <span class="title">总成本:</span>
-              <span>{{item.totalCost}}</span>
+              <span>{{item.totalCost | formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">可用:</span>
-              <span>{{item.cost}}</span>
+              <span>{{item.cost | formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">冻结:</span>
-              <span>{{item.frozenCost}}</span>
+              <span>{{item.frozenCost | formatScale2}}</span>
             </div>
           </div>
           <div>
             <div class="item">
               <span class="title">已使用:</span>
-              <span>{{item.usedCost}}</span>
+              <span>{{item.usedCost | formatScale2}}</span>
             </div>
             <div class="item">
               <span class="title">已退款:</span>
-              <span>{{item.refundCost}}</span>
+              <span>{{item.refundCost | formatScale2}}</span>
             </div>
           </div>
           <div class="sub-title bold">其他</div>
