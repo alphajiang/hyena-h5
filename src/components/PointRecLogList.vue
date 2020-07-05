@@ -216,12 +216,12 @@ export default {
         this.points = res.data.data
         this.total = res.data.total
 
-        this.points.forEach((v, idx) => {
-          this.formatType(v, null, v.type, idx)
+        this.points.forEach((v) => {
+          this.formatType(v, null, v.type)
         })
       })
     },
-    formatType(row, col, value, idx) {
+    formatType(row, col, value) {
       var display = value
       var cssClazz = ''
       if (value === 1) {

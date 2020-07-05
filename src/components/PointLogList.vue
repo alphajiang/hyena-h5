@@ -174,6 +174,7 @@ export default {
       })
     },
     formatType(row, col, value, idx) {
+      console.trace(idx)
       var display = value
       var cssClazz = ''
       if (value === 1) {
