@@ -40,12 +40,21 @@
     <a v-on:click="onClickAaa">fewgewfew</a>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     -->
+    <div class='bottom'>v20200705.1</div>
   </div>
 </template>
 
 <style lang="scss">
 .title {
   margin-left: 25px;
+}
+.bottom {
+  position: absolute;
+  bottom : 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  text-align: center;
 }
 </style>
 <script>
