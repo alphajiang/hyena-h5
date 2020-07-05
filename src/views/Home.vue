@@ -49,11 +49,11 @@
   margin-left: 25px;
 }
 .bottom {
-  position: absolute;
+  position: fixed;
   bottom : 10px;
   margin-left: auto;
   margin-right: auto;
-  width: 90%;
+  width: 100%;
   text-align: center;
 }
 </style>
