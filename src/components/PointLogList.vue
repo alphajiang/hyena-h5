@@ -11,6 +11,7 @@
     </el-breadcrumb>
 
     <div class="head-icon">
+      <div class='div-search'>
       <el-input
         placeholder="搜索订单号"
         size="small"
@@ -21,11 +22,13 @@
       >
         <el-button slot="append" icon="el-icon-search" @click="searchPoints"></el-button>
       </el-input>
+      </div>
+      <el-button size="mini"   icon="el-icon-edit" @click="onClickAnalyse">分析</el-button>
     </div>
     <el-table :data="points" stripe size="medium" fit>
       <el-table-column fixed type="index" width="40"></el-table-column>
       <el-table-column prop="createTime" fixed label="时间" width="100" header-align="center"></el-table-column>
-      <el-table-column label="变动" fixed width="50" header-align="center">
+      <el-table-column label="变动" fixed width="60" header-align="center">
         <template slot-scope="scope">
           <span :class="scope.row.cssClazz">{{scope.row.typeDisplay}}</span>
         </template>
@@ -35,15 +38,71 @@
           <span :class="scope.row.cssClazz">{{scope.row.delta.toFixed(2)}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="point" label="有效积分" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="available" label="可用" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="used" label="已使用" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="frozen" label="冻结" align="right" width="60" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="refund" label="退款" align="right" width="60" header-align="center" :formatter="formatScale2"></el-table-column>
-      <el-table-column prop="expire" label="过期" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
+      <el-table-column
+        prop="point"
+        label="有效积分"
+        align="right"
+        width="100"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="available"
+        label="可用"
+        align="right"
+        width="100"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="used"
+        label="已使用"
+        align="right"
+        width="100"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="frozen"
+        label="冻结"
+        align="right"
+        width="60"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="refund"
+        label="退款"
+        align="right"
+        width="60"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
+      <el-table-column
+        prop="expire"
+        label="过期"
+        align="right"
+        width="80"
+        header-align="center"
+        :formatter="formatScale2"
+      ></el-table-column>
       <el-table-column label="成本" header-align="center">
-        <el-table-column prop="deltaCost" label="变更" align="right" width="80" header-align="center" :formatter="formatScale2"></el-table-column>
-        <el-table-column prop="cost" label="有效" align="right" width="100" header-align="center" :formatter="formatScale2"></el-table-column>
+        <el-table-column
+          prop="deltaCost"
+          label="变更"
+          align="right"
+          width="80"
+          header-align="center"
+          :formatter="formatScale2"
+        ></el-table-column>
+        <el-table-column
+          prop="cost"
+          label="有效"
+          align="right"
+          width="100"
+          header-align="center"
+          :formatter="formatScale2"
+        ></el-table-column>
         <el-table-column
           prop="frozenCost"
           label="冻结"
@@ -199,6 +258,9 @@ export default {
         display = '退款'
         cssClazz = 'refund'
       }
+      if (row.abnormal == true) {
+        display = display + '(异常)'
+      }
       if (row.extra != null) {
         var extraDisplay = ''
         for (let [key, value] of Object.entries(row.extra)) {
@@ -244,7 +306,29 @@ export default {
           seqNum: pointLog.seqNum
         }
       })
+    },
+    onClickAnalyse() {
+      this.$http({
+        method: 'get',
+        url: '/api/hyena/system/analysePointLog',
+        params: {
+          type: this.pointType,
+          uid: this.uid,
+          subUid: this.subUid
+        }
+      }).then(res => {
+        console.log(res)
+
+        this.$message.info('分析完成')
+        this.loadPoints()
+      })
     }
   }
 }
 </script>
+<style scoped lang="scss">
+.div-search{
+  display: inline-block;
+  margin-right: 20px;
+}
+</style>
